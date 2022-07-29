@@ -39,7 +39,10 @@
 
 
     export default {
-components:{CarBox, CarInfoBox}
+components:{CarBox, CarInfoBox},
+    methods:{
+
+    }
     }
 </script>
 
