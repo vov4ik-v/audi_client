@@ -11,7 +11,11 @@
                 <form class="mt-1" @submit.prevent="submit">
                     <div class="form-group">
                         <label>Audi Model</label>
-                        <input name="audiModel" type="text" class="form-control" v-model="newCar.audiModel" required>
+                        <select class="form-control" v-model="newCar.audiModelId" required>
+                            <option v-for="audiModel in audiModels" :key="audiModel.id"
+                                    :value="audiModel.id">{{ audiModel.name }}
+                            </option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label>Model Name</label>
@@ -24,6 +28,10 @@
                     <div class="form-group">
                         <label>ImageURL</label>
                         <input type="text" class="form-control" v-model="newCar.imageURL" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Description ImageURL</label>
+                        <input type="text" class="form-control" v-model="newCar.descriptionImageUrl" required>
                     </div>
                     <div class="form-group">
                         <label>Small ImageUrl</label>
@@ -40,6 +48,10 @@
                     <div class="form-group">
                         <label>Side View ImageURL</label>
                         <input type="text" class="form-control" v-model="newCar.sideViewImageURL" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Crash Test Movie URL</label>
+                        <input type="text" class="form-control" v-model="newCar.crashTestMovie" required>
                     </div>
                     <div class="form-group">
                         <label>Engine Type</label>
@@ -102,18 +114,23 @@
 </template>
 
 <script>
-    import {useStore} from 'vuex'
-    import {ref,reactive,onMounted} from 'vue'
+    import {useStore, mapGetters} from 'vuex'
+    import {ref, reactive, onMounted} from 'vue'
     import {useRouter} from 'vue-router'
-    export default {
 
-        setup(context){
-            onMounted(() =>{
+    export default {
+        data() {
+            return {
+                audiModels: {}
+            }
+        },
+        setup(context) {
+            onMounted(() => {
             })
             const store = useStore();
             const router = useRouter();
-            const newCar= reactive({
-                audiModel: ref(""),
+            const newCar = reactive({
+                audiModelId: ref(""),
                 modelName: ref(""),
                 price: ref(0),
                 imageURL: ref(""),
@@ -121,6 +138,8 @@
                 topViewImageUrl: ref(""),
                 frontViewImageUrl: ref(""),
                 sideViewImageURL: ref(""),
+                descriptionImageUrl: ref(""),
+                crashTestMovie:ref(""),
                 engineType: ref(""),
                 driveType: ref(""),
                 emptyWeight: ref(""),
@@ -134,16 +153,22 @@
                 height: ref(""),
                 wheelBase: ref(""),
             })
-            function submit() {
-               store.dispatch("carModule/addCar",newCar)
-                router.push({name:'Home'})
-                context.emit('fetchData')
 
+            function submit() {
+                store.dispatch("carModule/addCar", newCar)
+                router.push({name: 'Home'})
             }
 
-            return{newCar,submit}
+            return {newCar, submit}
+
+        },
+        mounted() {
+            setTimeout(() => {
+                this.audiModels = this.$store.getters['audiModelModule/audiModels']
+            }, 450)
 
         }
+
     }
 </script>
 

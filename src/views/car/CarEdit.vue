@@ -11,7 +11,11 @@
                 <form class="mt-1" @submit.prevent="submit">
                     <div class="form-group">
                         <label>Audi Model</label>
-                        <input name="audiModel" type="text" class="form-control" v-model="updatedCar.audiModel" required>
+                        <select class="form-control" v-model="updatedCar.audiModelId" required>
+                            <option v-for="audiModel in audiModels" :key="audiModel.id"
+                                    :value="audiModel.id">{{ audiModel.name }}
+                            </option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label>Model Name</label>
@@ -24,6 +28,10 @@
                     <div class="form-group">
                         <label>ImageURL</label>
                         <input type="text" class="form-control" v-model="updatedCar.imageURL" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Description ImageURL</label>
+                        <input type="text" class="form-control" v-model="updatedCar.descriptionImageUrl" required>
                     </div>
                     <div class="form-group">
                         <label>Small ImageUrl</label>
@@ -40,6 +48,10 @@
                     <div class="form-group">
                         <label>Side View ImageURL</label>
                         <input type="text" class="form-control" v-model="updatedCar.sideViewImageURL" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Crash Test Movie URL</label>
+                        <input type="text" class="form-control" v-model="updatedCar.crashTestMovie" required>
                     </div>
                     <div class="form-group">
                         <label>Engine Type</label>
@@ -107,6 +119,7 @@
         data() {
             return {
                 id:null,
+                audiModels: {},
                 updatedCar: {}
             }
         },
@@ -114,7 +127,6 @@
             submit(){
                 this.$store.dispatch("carModule/editCar", this.updatedCar)
                 this.$router.push({name: 'Home'})
-                this.$emit('fetchData')
             }
         },
 
@@ -122,6 +134,7 @@
             setTimeout(() => {
                 console.log("mounted")
                 this.modelName = this.$route.params.modelName
+                this.audiModels = this.$store.getters['audiModelModule/audiModels']
                 this.updatedCar = this.$store.getters['carModule/carByAudiModel'](this.modelName)
             }, 350)
             // function submit() {

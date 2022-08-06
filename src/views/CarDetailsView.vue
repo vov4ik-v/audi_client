@@ -4,87 +4,123 @@
             <div class="">
                 <img class="w-100" :src="car.imageURL">
             </div>
-            <nav id="navbar" class="navbar" style="background-color: lightgray">
-                <ul style="margin-left: 3%">
-                    <li>Audi {{car.modelName}}</li>
-                    <li><router-link custom to="/details/{{audiModel}}"><a class="tablink">Технічні характеристики</a></router-link></li>
-                    <a type="button" @click="defaultTabOpen" class="tablink" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                        Габарити
-                    </a>
-<!--                     Modal-->
-                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                         aria-hidden="true">
-                        <div class="modal-dialog modal-lg modal-dialog-centered" id="myModal" style="">
-                            <div class="modal-content" style="">
-                                <div class="modal-header">
-                                    <h3 class="modal-title text-center" style="padding-left: 42%" id="exampleModalLabel">Габарити</h3>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
+            <nav class="navbar navbar-expand-lg navbar-light" style="background-color: lightgray">
+                <div class="container-fluid">
+                    <button type="button" class="navbar-toggler" data-bs-toggle="collapse"
+                            data-bs-target="#navbarDetails">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarDetails">
+                        <div class="navbar-nav">
+                            <div class="navbar-nav navbar">
+                                <a class="nav-link scrollto active">Audi {{car.modelName}}</a>
+                                <a class="nav-link scrollto tablink">Технічні характеристики</a>
+                                <a class="nav-link scrollto tablink" type="button" @click="defaultTabOpen"
+                                   data-bs-toggle="modal" data-bs-target="#exampleModal">Габарити</a>
+                                <a class="nav-link scrollto tablink" type="button" @click="defaultTabOpen"
+                                   data-bs-toggle="modal" data-bs-target="#videoModal">Crash test</a>
+                                <div class="modal fade" id="exampleModal" tabindex="-1"
+                                     aria-labelledby="exampleModalLabel"
+                                     aria-hidden="true">
+                                    <div class="modal-dialog modal-lg modal-dialog-centered" id="myModal" style="">
+                                        <div class="modal-content" style="">
+                                            <div class="modal-header">
+                                                <h3 class="modal-title text-center" style="text-align: center"
+                                                    id="exampleModalLabel">Габарити</h3>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="justify-content-center d-flex p-0 m-0">
+                                                    <li><a class="tablink" @click="openPage('SideView', this)"
+                                                           id="defaultOpen">Збоку</a>
+                                                    </li>
+                                                    <li><a class="tablink" @click="openPage('TopView', this)">Зверху</a>
+                                                    </li>
+                                                    <li><a class="tablink" @click="openPage('FrontView', this)">Спереду
+                                                        та
+                                                        ззаду</a></li>
+                                                </div>
+                                                <div id="SideView" class="tabcontent">
+                                                    <div>
+                                                        <div class="container">
+                                                            <h3 style="text-align: center">
+                                                                Вид збоку
+                                                            </h3>
+
+                                                            <div class="block">
+                                                                <img class="block-img w-100" style="text-align: center"
+                                                                     :src="car.sideViewImageURL"/>
+                                                            </div>
+                                                            <h6 style="text-align: center">
+                                                                <i>Розміри у міліметрах.</i>
+                                                            </h6>
+
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <div id="TopView" class="tabcontent">
+                                                    <div>
+                                                        <div class="container" style="margin-top: 5%">
+                                                            <h3 style="text-align: center">
+                                                                Вид зверху
+                                                            </h3>
+
+                                                            <div class="block">
+                                                                <img class="block-img w-100" style="text-align: center"
+                                                                     :src="car.topViewImageUrl"/>
+                                                            </div>
+
+                                                            <h6 style="text-align: center">
+                                                                <i>Розміри у міліметрах.</i>
+                                                            </h6>
+
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <div id="FrontView" class="tabcontent">
+                                                    <div>
+                                                        <div class="container" style="margin-top: 5%">
+                                                            <h3 style="text-align: center">
+                                                                Вид спереду та ззаду
+                                                            </h3>
+                                                            <div class="block">
+                                                                <img class="block-img w-100" style="text-align: center"
+                                                                     :src="car.frontViewImageUrl"/>
+                                                            </div>
+                                                            <h6 style="text-align: center">
+                                                                <i>Розміри у міліметрах.</i>
+                                                                <br>
+                                                                <br>
+                                                                <br>
+
+                                                            </h6>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="modal-body">
-                                    <div class="justify-content-center d-flex p-0 m-0"><li><a class="tablink" @click="openPage('SideView', this)" id="defaultOpen">Вид збоку</a>
-                                    </li>
-                                    <li><a class="tablink" @click="openPage('TopView', this)">Вид зверху</a>
-                                    </li>
-                                    <li><a class="tablink" @click="openPage('FrontView', this)">Вид спереду та
-                                        ззаду</a></li></div>
-                                    <div id="SideView" class="tabcontent">
-                                        <div>
-                                            <div class="container">
-                                                <h3 style="text-align: center">
-                                                    Вид збоку
-                                                </h3>
-
-                                                <div class="block">
-                                                    <img class="block-img w-100" style="text-align: center"
-                                                         :src="car.sideViewImageURL"/>
-                                                </div>
-                                                <h6 style="text-align: center">
-                                                    <i>Розміри у міліметрах.</i>
-                                                </h6>
-
+                                <div class="modal fade" id="videoModal" tabindex="-1"
+                                     aria-labelledby="videoModalLabel"
+                                     aria-hidden="true">
+                                    <div class="modal-dialog modal-lg modal-dialog-centered" id="myVideo" style="">
+                                        <div class="modal-content" style="">
+                                            <div class="modal-header">
+                                                <h3 class="modal-title text-center" style="text-align: center"
+                                                    id="videoModalLabel">Crash Test</h3>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
                                             </div>
-
-                                        </div>
-                                    </div>
-                                    <div id="TopView" class="tabcontent">
-                                        <div>
-                                            <div class="container" style="margin-top: 5%">
-                                                <h3 style="text-align: center">
-                                                    Вид зверху
-                                                </h3>
-
-                                                <div class="block">
-                                                    <img class="block-img w-100" style="text-align: center"
-                                                         :src="car.topViewImageUrl"/>
+                                            <div class="modal-body">
+                                                <div class='embed-container'>
+                                                    <iframe :src='car.crashTestMovie'
+                                                            frameborder='0' allowfullscreen></iframe>
                                                 </div>
-
-                                                <h6 style="text-align: center">
-                                                    <i>Розміри у міліметрах.</i>
-                                                </h6>
-
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <div id="FrontView" class="tabcontent">
-                                        <div>
-                                            <div class="container" style="margin-top: 5%">
-                                                <h3 style="text-align: center">
-                                                    Вид спереду та ззаду
-                                                </h3>
-                                                <div class="block">
-                                                    <img class="block-img w-100" style="text-align: center"
-                                                         :src="car.frontViewImageUrl"/>
-                                                </div>
-                                                <h6 style="text-align: center">
-                                                    <i>Розміри у міліметрах.</i>
-                                                    <br>
-                                                    <br>
-                                                    <br>
-
-                                                </h6>
-
                                             </div>
                                         </div>
                                     </div>
@@ -92,14 +128,15 @@
                             </div>
                         </div>
                     </div>
-                </ul>
-                <i class="bi bi-list mobile-nav-toggle"></i>
-            </nav><!-- .navbar -->
+                </div>
+            </nav>
+
             <div>
                 <div class="container mt-2">
                     <!-- ======= About List Section ======= -->
                     <div class="row">
-                        <h1 style="text-align: center"><strong>Технічні характеристики Audi {{car.modelName}}</strong></h1>
+                        <h1 style="text-align: center"><strong>Технічні характеристики Audi {{car.modelName}}</strong>
+                        </h1>
                         <div class="col-lg-12" style="margin-top: 40px">
                             <p style="text-align: center"><b>Audi завжди символізує прогрес через технології. Ви зможете
                                 відкрити його для себе не лише у наших потужних і водночас економічних двигунах, але й у
@@ -318,7 +355,7 @@
                 document.getElementById(pageName).style.display = "block";
 
             },
-            defaultTabOpen(){
+            defaultTabOpen() {
                 document.getElementById("defaultOpen").click();
             }
         },

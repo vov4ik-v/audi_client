@@ -3,7 +3,7 @@
         <div class="container">
             <div class="row">
                 <div v-show="alignment === 'right'" class="image col-lg-6 order-1" >
-                    <img :src="car.smallImageUrl" alt="" class="w-100 h-100 img-fluid">
+                        <img :src="car.descriptionImageUrl" alt="" class="w-100 h-100 img-fluid">
                 </div>
 
                 <div class="col-lg-6 order-2 order-lg-1">
@@ -28,7 +28,7 @@
                 </div>
                 <div v-show="alignment === 'left'" class="image col-lg-6 order-1"
                 >
-                    <img :src="car.smallImageUrl" alt="" class="h-100 w-100 img-fluid">
+                    <img :src="car.descriptionImageUrl" alt="" class="h-100 w-100 img-fluid">
                 </div>
             </div>
         </div>

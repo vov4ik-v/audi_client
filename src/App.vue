@@ -1,30 +1,20 @@
 <template>
-    <TheTopbar/>
-    <TheNavbar/>
-   <router-view @fetchData="fetchData()"></router-view>
-    <TheFooter/>
-
+        <component :is="layout +'-layout'" v-if="layout"></component>
 </template>
 
 <script>
-    import TheTopbar from "./components/TheTopbar";
-    import TheFooter from "./components/TheFooter";
-    import TheNavbar from "./components/TheNavbar";
-    import {useStore} from 'vuex'
-    import {ref,onMounted} from 'vue';
+    import {useRoute} from 'vue-router'
+    import {computed} from 'vue'
+    import MainLayout from "./layout/MainLayout";
+    import AuthLayout from "./layout/AuthLayout";
     export default {
-        components: {TheTopbar, TheFooter,TheNavbar},
+        components: {MainLayout,AuthLayout},
         setup(){
-            const store = useStore()
-            function fetchData(){
-                store.dispatch("carModule/getAllCars")
-                store.dispatch("audiModelModule/getAllAudiModels")
+            const route = useRoute()
+            return {
+                layout:computed(() => route.meta.layout)
 
             }
-            onMounted( () => {
-                fetchData()
-            })
-            return {fetchData}
 
         },
 

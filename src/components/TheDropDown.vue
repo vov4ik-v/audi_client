@@ -1,23 +1,28 @@
 <template>
-    <li class="dropdown"><a href="#"><span>Моделі</span> <i class="bi bi-chevron-down"></i></a>
-        <ul v-for="audiModel in audiModels" :key="audiModel.id">
-            <li class="dropdown"><a href="#">{{audiModel}}<span>
+
+    <li class="dropdown" v-for="audiModel in models" :key="audiModel.id"><a href="#"><span>
+                        {{audiModel.name}}
                         </span> <i class="bi bi-chevron-right"></i></a>
-                <ul v-for="car in audiModel.cars">
-                    <li>
-                        {{car.modelName}}
-                    </li>
-                </ul>
+        <ul>
+            <li v-for="car in audiModel.cars" :key="car.id">
+                <router-link custom v-slot="{navigate}" :to="{name:'Details', params:{modelName:toPathName(car)}}">
+                    <a @click="navigate"> {{car.modelName}}</a>
+                </router-link>
             </li>
         </ul>
     </li>
+
+
 
 </template>
 
 <script>
     export default {
+        props:['models'],
         methods: {
-
+            toPathName(car){
+                return car.modelName.replace(/\s/g, '-').toLowerCase()
+            },
         },
         data() {
             return {
@@ -26,10 +31,6 @@
             }
         },
         mounted() {
-            console.log("drop")
-            setTimeout(() => {
-                this.audiModels = this.$store.getters['audiModelModule/audiModels']
-            }, 250)
         }
     }
 </script>
