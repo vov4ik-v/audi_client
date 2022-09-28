@@ -13,7 +13,7 @@ export default {
     actions:{
         async addCar(state,car){
             try{
-                let {data} =  await axios.post(`http://localhost:8088/car/addCar`,JSON.stringify(car),{
+                let {data} =  await axios.post(`http://localhost:8088/api/car/addCar`,JSON.stringify(car),{
                     headers: {
                         'Content-Type': 'application/json'
                     }})
@@ -29,7 +29,7 @@ export default {
         },
         async editCar(state,car){
             try{
-                let {data} =  await axios.put(`http://localhost:8088/car/editCar/${car.id}`,JSON.stringify(car),{
+                let {data} =  await axios.put(`http://localhost:8088/api/car/editCar/${car.id}`,JSON.stringify(car),{
                     headers: {
                         'Content-Type': 'application/json'
                     }})
@@ -45,7 +45,7 @@ export default {
         },
         async deleteCar(state,carId){
             try{
-                let {data} =  await axios.delete(`http://localhost:8088/car/deleteCar/${carId}`)
+                let {data} =  await axios.delete(`http://localhost:8088/api/car/deleteCar/${carId}`)
                 console.log(data)
                 if (data.status === 200){
                     await sweetalert({ icon:'success',title: 'Success!', text: 'Car deleted successfully'});
@@ -58,7 +58,7 @@ export default {
         },
         async getAllCars({commit}){
             try{
-                let response =  await axios.get(`http://localhost:8088/car/listCar`)
+                let response =  await axios.get(`http://localhost:8088/api/car/listCar`)
                 if (response.status === 200){
                     commit("getAllCars",response.data)
                 }
@@ -66,13 +66,13 @@ export default {
                 console.log(error);
             }
 
+
         }
 
     },
     mutations:{
         getAllCars(state,cars){
             state.cars=cars
-            console.log("getAllCars")
         }
 
     },

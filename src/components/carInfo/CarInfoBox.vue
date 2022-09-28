@@ -37,7 +37,7 @@
 
 <script>
     export default {
-        props: ["id", "alignment"],
+        props: ["id", "alignment","cars"],
         data() {
             return {
                 car: {},
@@ -45,23 +45,26 @@
             }
 
         },
+        computed:{
+            getModelById(){
+                return this.cars.find(car => car.id == this.id)
+
+            }
+        },
         methods:{
             push(){
                 this.$router.push({
                     name:'Details',
                     params:{
                         modelName:this.pathModelName
-
                     }
                 })
 
             }
         },
-        mounted() {
-            setTimeout(() => {
-                this.car = this.$store.getters['carModule/carById'](this.id)
-                this.pathModelName = this.car.modelName.replace(/\s/g, '-').toLowerCase()
-            }, 250)
+        beforeUpdate() {
+         this.car = this.getModelById
+            this.pathModelName = this.car.modelName.replace(/\s/g, '-').toLowerCase()
         }
 
     }

@@ -1,155 +1,146 @@
 <template>
-    <div class="container emp-profile" style="background-color: #e9e9e9">
-        <form method="post">
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="profile-img">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt=""/>
-                        <div class="file btn btn-lg btn-primary">
+    <!--    https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp-->
+    <div class="container" id="toModal">
+        <div class="rounded-top text-white d-flex flex-row" style="background-color: #000; height:200px;">
+            <div class="ms-4 mt-5 d-flex flex-column">
+                <img v-if="getProfileImage" :src="isCurrentUser ? getCurrentUserImage : getProfileImage"
+                     alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2"
+                     style="width: 150px; z-index: 1">
+
+                <div class="d-flex">
+                    <div v-if="isCurrentUser">
+                        <button type="button" class="btn btn-outline-dark m-1" data-bs-toggle="modal"
+                                data-bs-target="#changePhoto" data-mdb-ripple-color="dark"
+                                style="z-index: 1;">
                             Change Photo
-                            <input type="file" name="file"/>
-                        </div>
+                        </button>
+                        <button type="button" class="btn btn-outline-dark justify-content-end" data-bs-toggle="modal"
+                                data-bs-target="#editProfile" data-mdb-ripple-color="dark"
+                                style="z-index: 1;">
+                            Edit profile
+
+                        </button>
+                    </div>
+                    <div v-else>
+                        <button type="button" class="btn btn-outline-dark m-1" data-mdb-ripple-color="dark"
+                                style="z-index: 1;">
+                            Follow
+                        </button>
+                        <button type="button" class="btn btn-outline-dark justify-content-end"
+                                data-mdb-ripple-color="dark"
+                                style="z-index: 1;">
+                            Direct
+                        </button>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="profile-head">
-                        <h5>
-                            Kshiti Ghelani
-                        </h5>
-                        <ul class="nav nav-tabs" id="myTab" role="tablist">
-                            <li class="nav-item">
-                                <a class="nav-link active" id="home-tab" data-toggle="tab"  role="tab" aria-controls="home" aria-selected="true">About</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Timeline</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
+                <edit-profile modal-id="editProfile"></edit-profile>
+                <change-photo modal-id="changePhoto"></change-photo>
+            </div>
+            <div class="ms-3" style="margin-top: 130px;">
+
+            </div>
+        </div>
+        <div class="p-4 text-black" style="background-color: #f8f9fa;">
+            <div class="d-flex justify-content-end text-center py-1">
+            </div>
+        </div>
+        <div class="card-body p-4 text-black">
+            <div class="mb-5">
+                <p class="lead fw-normal mb-1">About</p>
+                <div class="p-4" style="background-color: #f8f9fa;">
+                    <h3 class="mb-1">{{isCurrentUser ? currentUser.username :getUserInfo.username}}</h3>
+                    <p class="font-italic mb-1">{{isCurrentUser ? currentUser.firstname :getUserInfo.firstname}} {{isCurrentUser ? currentUser.lastname :getUserInfo.lastname}}</p>
+                    <p class="font-italic mb-1">{{isCurrentUser ? currentUser.bio :getUserInfo.bio}}</p>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-4">
-                </div>
-                <div class="col-md-8">
-                    <div class="tab-content profile-tab" id="myTabContent">
-                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>User Id</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <p>Kshiti123</p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>Name</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <p>Kshiti Ghelani</p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>Email</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <p>kshitighelani@gmail.com</p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>Phone</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <p>123 456 7890</p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>Profession</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <p>Web Developer and Designer</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>Experience</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <p>Expert</p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>Hourly Rate</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <p>10$/hr</p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>Total Projects</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <p>230</p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>English Level</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <p>Expert</p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>Availability</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <p>6 months</p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <label>Your Bio</label><br/>
-                                    <p>Your detail description</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <p class="lead fw-normal mb-0">Posts</p>
+                <div v-if="isCurrentUser">
+                    <p class="mb-0" data-bs-toggle="modal" data-bs-target="#postAddModal"><a class="text-muted">Add
+                        post</a></p>
+                    <post-add modal-id="postAddModal"></post-add>
                 </div>
             </div>
-        </form>
+            <section id="post" class="post">
+
+                <div class="row">
+                    <post-box v-for="post in getAllPostsForUser" :current-user-image="getCurrentUserImage"
+                              :post-image="'data:image/png;base64,'+ post.postImage"
+                              :profile-image="getProfileImage" :modal-id="'postDetailsWithId'+post.id" :post-info="post"
+                              :profile-info="getUserInfo"
+                    ></post-box>
+                </div>
+            </section>
+        </div>
     </div>
 </template>
 
 <script>
+    import UserService from "../../services/user.service";
+    import PostBox from "../../components/post/PostBox";
+    import PostAdd from "../../components/post/PostAdd";
+    import EditProfile from "../../components/user/EditProfile";
+    import ChangePhoto from "../../components/user/ChangePhoto";
+
     export default {
-        data(){
-            return{
-                ariaSelected:'home'
+        // props: ['user', 'userImage'],
+        data() {
+            return {
+                content: "",
+                previewImage: null,
+                username: "",
+                current: new Date()
 
             }
         },
-        methods:{
-            ariaSelected(ariaSelected){
-                this.ariaSelected = ariaSelected
-
+        inject:['user','userImage'],
+        components: {PostBox, PostAdd, EditProfile, ChangePhoto},
+        computed: {
+            getUserInfo() {
+                return this.$store.getters["auth/getUserByUsername"];
+            },
+            getProfileImage() {
+                let image = this.$store.getters['imageUploadModule/getUserImage']
+                return 'data:image/png;base64,' + image.imageBytes
+            },
+            getCurrentUserImage() {
+                return this.userImage.value
+            },
+            currentUser() {
+                return this.user.value;
+            },
+            getAllPostsForUser() {
+                return this.$store.getters['postModule/postsForUser'];
+            },
+            isCurrentUser() {
+                return this.user.value.username === this.$route.params.username
             }
+
+        },
+        created() {
+            if (!this.$store.state.auth.initialState) {
+                console.log(this.$store.state.auth.initialState)
+                this.$router.push('/signin');
+            }
+            this.username = this.$route.params.username
+
+            this.$store.dispatch('postModule/getAllPostsForUserByUsername', this.username)
+            this.$store.dispatch('imageUploadModule/getUserImage', this.username)
+            this.$store.dispatch('auth/getUserByUsername', this.username)
+            // this.$store.dispatch('imageUploadModule/getPostImage',28)
+            //  this.$store.dispatch('imageUploadModule/getProfileImage')
+            // // this.previewImage = 'data:image/png;base64,'+this.$store.dispatch('imageUploadModule/getProfileImage')
+            // // console.log(this.previewImage)
+            // // this.previewImage = this.getProfileImage
+
+            // console.log(this.$store.getters['imageUploadModule/getProfileImage'])
 
         }
     }
 </script>
 
 <style scoped>
-
+    .post {
+        padding: 0
+    }
 </style>

@@ -5,7 +5,7 @@
                 <router-link to="/" class="navbar-brand">
                     <img src="../assets/img/logo2.png" height="25" alt="CoolBrand">
                 </router-link>
-                <ul v-if="isAuth" class="navbar-toggler border-0" style="margin-right: 40px;" id="icon">
+                <ul v-if="loggedIn" class="navbar-toggler border-0" style="margin-right: 40px;" id="icon">
                     <!-- Avatar -->
                     <li class="nav-item dropdown">
                         <a
@@ -17,7 +17,7 @@
                                 aria-expanded="false"
                         >
                             <img
-                                    src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img (31).webp"
+                                    :src="getCurrentUserImage"
                                     class="rounded-circle"
                                     height="22"
                                     alt="Portrait of a Woman"
@@ -26,13 +26,25 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <li>
-                                <a class="dropdown-item" href="#">My profile</a>
+                              <a @click="push"
+                                                                                      class="dropdown-item"><i
+                                        class="fa fa-user"></i> {{getUserInfo.username}}</a>
+
                             </li>
                             <li>
-                                <a class="dropdown-item" href="#">Settings</a>
+                                <router-link to="/friends" custom v-slot="{navigate}"><a @click="navigate"
+                                                                                         class=" dropdown-item"><i
+                                        class="fas fa-user-friends"></i> Friends</a></router-link>
+
                             </li>
                             <li>
-                                <a class="dropdown-item" href="#">Logout</a>
+                                <router-link to="/settings" custom v-slot="{navigate}"><a @click="navigate"
+                                                                                          class="dropdown-item"><i
+                                        class="fa fa-sliders"></i> Settings</a></router-link>
+
+                            </li>
+                            <li>
+                                <a @click.prevent="logOut" class="dropdown-item"><i class="bi bi-box-arrow-right"></i> Logout</a>
                             </li>
                         </ul>
                     </li>
@@ -41,38 +53,49 @@
                         data-bs-target="#navbarCollapse">
                     <span>Menu</span>
                 </button>
-                <i v-if="!isAuth" class="navbar-toggler bi bi-box-arrow-in-right"></i>
+                <router-link to="/signin" custom v-slot="{navigate}"><i v-if="!loggedIn" @click="navigate"
+                                                                        class="navbar-toggler bi bi-box-arrow-in-right"></i>
+                </router-link>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav ms-auto">
-                        <div class="navbar-nav navbar">
+                        <div class="navbar-nav navbar" id="navbar_main">
 
-                            <a class="nav-link scrollto active" href="#hero">Головна</a>
-                            <a class="nav-link scrollto" href="#about">Новини</a>
-                            <a class="nav-link scrollto " href="#portfolio">Ауді Асистанс</a>
-                            <div class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle dropdown"
-                                   data-bs-toggle="dropdown">Моделі</a>
-                                <div class="dropdown-menu">
-                                    <TheDropDown :models="models"></TheDropDown>
-                                </div>
-                            </div>
+                            <router-link custom to="/" v-slot="{navigate}"><a  class="nav-link scrollto active"
+                                                                       @click="navigate">Головна</a></router-link>
+                            <router-link custom to="/news" v-slot="{navigate}"><a @click="navigate" class="nav-link scrollto">Новини</a></router-link>
+                            <router-link custom to="/audiAssistant" v-slot="{navigate}"><a @click="navigate" class="nav-link scrollto ">Ауді Асистанс</a></router-link>
                         </div>
                     </div>
                 </div>
-                <div v-if="!isAuth" class="navbar-nav profile_sign" style="">
-                   <router-link to="/signin" custom v-slot="{navigate}"><button class="btn my-btn-primary sign-up-btn" @click="navigate">Login</button></router-link>
-                    <router-link to="/signup" custom v-slot="{navigate}"><button @click="navigate" style="margin-left: 5px" class="btn my-btn-primary sign-up-btn">Sign up</button></router-link>
+                <div v-if="!loggedIn" class="navbar-nav profile_sign" style="">
+                    <router-link to="/signin" custom v-slot="{navigate}">
+                        <button class="btn my-btn-primary sign-up-btn" @click="navigate">Login</button>
+                    </router-link>
+                    <router-link to="/signup" custom v-slot="{navigate}">
+                        <button @click="navigate" style="margin-left: 5px" class="btn my-btn-primary sign-up-btn">Sign
+                            up
+                        </button>
+                    </router-link>
                 </div>
                 <div v-else class="navbar-nav profile_sign">
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown user-action"
-                           data-bs-toggle="dropdown"><img src="https://www.tutorialrepublic.com/examples/images/avatar/3.jpg" class="avatar rounded-circle" alt="Avatar"> Antonio Moreno <b class="caret"></b></a>
+                           data-bs-toggle="dropdown"><img
+                                :src="getCurrentUserImage"
+                                class="avatar rounded-circle" style="width: 40px; margin-right: 4px" alt="Avatar"> {{getUserInfo.firstname}}  {{getUserInfo.lastname}} <b class="caret"></b></a>
                         <div class="dropdown-menu" id="myMenu">
-                            <a href="#" class="dropdown-item"><i class="fa fa-user"></i> Profile</a>
-                            <a href="#" class="dropdown-item"><i class="fa fa-calendar-o"></i> Calendar</a>
-                            <a href="#" class=" dropdown-item"><i class="fa fa-sliders"></i> Settings</a>
+                            <a @click="push"
+                                                                                  class="dropdown-item"><i
+                                    class="fa fa-user"></i> Profile</a>
+                            <router-link to="/friends" custom v-slot="{navigate}"><a @click="navigate"
+                                                                                      class="dropdown-item"><i
+                                    class="fas fa-user-friends"></i> Friends</a></router-link>
+                            <router-link to="/settings" custom v-slot="{navigate}"><a @click="navigate"
+                                                                                     class=" dropdown-item"><i
+                                    class="fa fa-sliders"></i> Settings</a></router-link>
                             <div class="divider dropdown-divider"></div>
-                            <a href="#" class=" dropdown-item"><i class="bi bi-box-arrow-right"></i> Logout</a>
+                            <a @click.prevent="logOut" class=" dropdown-item"><i class="bi bi-box-arrow-right"></i>
+                                Logout</a>
                         </div>
                     </div>
                 </div>
@@ -90,18 +113,38 @@
         components: {TheDropDown},
         data() {
             return {
-                cars: {},
-                models: [],
-                isAuth: false
+
             }
 
         },
-        methods: {},
+        inject:['user','userImage'],
+        computed: {
+            loggedIn() {
+                return this.$store.state.auth.initialState.status.loggedIn;
+            },
+            getUserInfo() {
+                return this.user.value;
+            },
+            getCurrentUserImage() {
+                return this.userImage.value
+            },
+        },
+        methods: {
+            logOut() {
+                this.$store.dispatch('auth/logout');
+                this.$router.push('/signin');
+            },
+            push(){
+                this.$router.push({
+                    name:'User',
+                    params:{
+                        username:this.getUserInfo.username
+                    }
+                })
+
+            }
+        },
         mounted() {
-            setTimeout(() => {
-                this.cars = this.$store.getters['carModule/carById'](this.id)
-                this.models = this.$store.getters['audiModelModule/audiModels']
-            }, 500)
 
         }
 
@@ -113,21 +156,27 @@
         border-color: saddlebrown;
 
     }
-    .my-btn-primary{
+
+    .my-btn-primary {
         color: #ffffff;
         background: #33cabb;
         border: none;
         text-align: center;
 
     }
+
     #myMenu a {
         color: #777 !important;
         padding: 8px 20px;
         line-height: normal;
         font-size: 11px;
     }
-    #myMenu .user-action{
+
+    #myMenu .user-action {
         padding: 9px 15px;
         font-size: 15px;
+    }
+    #navbar_main a{
+        cursor: pointer;
     }
 </style>

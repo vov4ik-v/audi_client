@@ -13,7 +13,7 @@ export default {
     actions:{
         async addAudiModel(state,audiModel){
             try{
-                let {data} =  await axios.post(`http://localhost:8088/audiModel/addModel`,JSON.stringify(audiModel),{
+                let {data} =  await axios.post(`http://localhost:8088/api/model/addModel`,JSON.stringify(audiModel),{
                     headers: {
                         'Content-Type': 'application/json'
                     }})
@@ -29,7 +29,7 @@ export default {
         },
         async editAudiModel(state,audiModel){
             try{
-                let {data} =  await axios.put(`http://localhost:8088/audiModel/edit/${audiModel.id}`,JSON.stringify(audiModel),{
+                let {data} =  await axios.put(`http://localhost:8088/api/model/edit/${audiModel.id}`,JSON.stringify(audiModel),{
                     headers: {
                         'Content-Type': 'application/json'
                     }})
@@ -45,7 +45,7 @@ export default {
         },
         async deleteAudiModel(state,audiModelId){
             try{
-                let {data} =  await axios.delete(`http://localhost:8088/audiModel/delete/${audiModelId}`)
+                let {data} =  await axios.delete(`http://localhost:8088/api/model/delete/${audiModelId}`)
                 console.log(data)
                 if (data.status === 200){
                     await sweetalert({ icon:'success',title: 'Success!', text: 'Audi Model deleted successfully'});
@@ -58,7 +58,7 @@ export default {
         },
         async getAllAudiModels({commit}){
             try{
-                let response =  await axios.get(`http://localhost:8088/audiModel/getAll`)
+                let response =  await axios.get(`http://localhost:8088/api/model/getAll`)
                 if (response.status === 200){
                     commit("getAllAudiModels",response.data)
                 }
@@ -79,6 +79,9 @@ export default {
         audiModels:(state) =>{return state.audiModels},
         audiModelById: (state) => (id) =>{
             return state.audiModels.find(audiModel => audiModel.id == id)
+        },
+        audiModelByName: (state) => (audiModelName) =>{
+            return state.audiModels.find(audiModel => audiModel.name == audiModelName)
         }
 
     }

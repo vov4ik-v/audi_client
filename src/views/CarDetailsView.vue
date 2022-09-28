@@ -357,17 +357,19 @@
             },
             defaultTabOpen() {
                 document.getElementById("defaultOpen").click();
-            }
-        },
-        mounted() {
-            setTimeout(() => {
+            },
+            async loadAudiInfo(){
+                await this.$store.dispatch("carModule/getAllCars")
                 this.modelName = this.$route.params.modelName
-                this.car = this.$store.getters['carModule/carByAudiModel'](this.modelName)
-            }, 450)
+                this.car = await this.$store.getters['carModule/carByAudiModel'](this.modelName)
+            }
+
+        },
+
+         created() {
+             this.loadAudiInfo()
 
         }
-
-
     }
 </script>
 
@@ -387,5 +389,8 @@
         display: none;
         /*padding: 100px 20px;*/
         height: 100%;
+    }
+    tab{
+        text-align: left;
     }
 </style>

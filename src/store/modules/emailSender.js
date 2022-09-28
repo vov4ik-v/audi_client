@@ -13,7 +13,7 @@ export default {
     actions:{
         async addEmail(state,email){
             try{
-                let {data} =  await axios.post(`http://localhost:8088/email/addEmail`,JSON.stringify({
+                let {data} =  await axios.post(`http://localhost:8088/api/email/addEmail`,JSON.stringify({
                     email:email
                 }),{
                     headers: {
@@ -31,7 +31,7 @@ export default {
         },
         async getAllCars({commit}){
             try{
-                let response =  await axios.get(`http://localhost:8088/email/getEmails`)
+                let response =  await axios.get(`http://localhost:8088/api/email/getEmails`)
                 if (response.status === 200){
                     commit("getAllEmails",response.data)
                 }

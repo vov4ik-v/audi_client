@@ -757,18 +757,18 @@ section {
 }
 
 /*--------------------------------------------------------------
-# Portfolio
+# post
 --------------------------------------------------------------*/
-.portfolio .portfolio-item {
+.post .post-item {
   margin-bottom: 30px;
 }
-.portfolio #portfolio-filters {
+.post #post-filters {
   padding: 0;
   margin: 0 0 35px 0;
   list-style: none;
   text-align: center;
 }
-.portfolio #portfolio-filters li {
+.post #post-filters li {
   cursor: pointer;
   margin: 0 15px 15px 0;
   display: inline-block;
@@ -782,24 +782,25 @@ section {
   margin-bottom: 5px;
   transition: all 0.3s ease-in-out;
 }
-.portfolio #portfolio-flters li:hover, .portfolio #portfolio-flters li.filter-active {
+.post #post-flters li:hover, .post #post-flters li.filter-active {
   background: #01b1d7;
   color: #fff;
 }
-.portfolio #portfolio-flters li:last-child {
+.post #post-flters li:last-child {
   margin-right: 0;
 }
-.portfolio .portfolio-wrap {
+.post .post-wrap {
   box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.08);
   transition: 0.3s;
   position: relative;
   overflow: hidden;
 }
-.portfolio .portfolio-wrap img {
+.post .post-wrap img {
   transition: 0.3s;
 }
-.portfolio .portfolio-wrap .portfolio-info {
+.post .post-wrap .post-info {
   display: flex;
+    cursor: pointerw;
   justify-content: center;
   align-items: center;
   flex-direction: column;
@@ -814,20 +815,20 @@ section {
   background: rgba(53, 65, 68, 0.6);
   padding-bottom: 30px;
 }
-.portfolio .portfolio-wrap .portfolio-info h4 {
+.post .post-wrap .post-info h4 {
   font-size: 20px;
   color: #fff;
   font-weight: 600;
 }
-.portfolio .portfolio-wrap .portfolio-info p {
+.post .post-wrap .post-info p {
   color: #fff;
   font-size: 14px;
   text-transform: uppercase;
 }
-.portfolio .portfolio-wrap .portfolio-info .portfolio-links {
+.post .post-wrap .post-info .post-links {
   display: flex;
 }
-.portfolio .portfolio-wrap .portfolio-info .portfolio-links a {
+.post .post-wrap .post-info .post-links a {
   color: #01b1d7;
   margin: 0 4px;
   background-color: #fff;
@@ -839,76 +840,76 @@ section {
   align-items: center;
   justify-content: center;
 }
-.portfolio .portfolio-wrap .portfolio-info .portfolio-links a i {
+.post .post-wrap .post-info .post-links a i {
   font-size: 18px;
   line-height: 0;
 }
-.portfolio .portfolio-wrap .portfolio-info .portfolio-links a:hover {
+.post .post-wrap .post-info .post-links a:hover {
   background: #01b1d7;
   color: #fff;
 }
-.portfolio .portfolio-wrap:hover {
+.post .post-wrap:hover {
   box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.16);
 }
-.portfolio .portfolio-wrap:hover .portfolio-info {
+.post .post-wrap:hover .post-info {
   opacity: 1;
   padding-bottom: 0;
 }
-.portfolio .portfolio-wrap:hover img {
+.post .post-wrap:hover img {
   transform: scale(1.1);
 }
 
 /*--------------------------------------------------------------
-# Portfolio Details
+# post Details
 --------------------------------------------------------------*/
-.portfolio-details {
+.post-details {
   padding-top: 40px;
 }
-.portfolio-details .portfolio-details-slider img {
+.post-details .post-details-slider img {
   width: 100%;
 }
-.portfolio-details .portfolio-details-slider .swiper-pagination {
+.post-details .post-details-slider .swiper-pagination {
   margin-top: 20px;
   position: relative;
 }
-.portfolio-details .portfolio-details-slider .swiper-pagination .swiper-pagination-bullet {
+.post-details .post-details-slider .swiper-pagination .swiper-pagination-bullet {
   width: 12px;
   height: 12px;
   background-color: #fff;
   opacity: 1;
   border: 1px solid #01b1d7;
 }
-.portfolio-details .portfolio-details-slider .swiper-pagination .swiper-pagination-bullet-active {
+.post-details .post-details-slider .swiper-pagination .swiper-pagination-bullet-active {
   background-color: #01b1d7;
 }
-.portfolio-details .portfolio-info {
+.post-details .post-info {
   padding: 30px;
   box-shadow: 0px 0 30px rgba(53, 65, 68, 0.08);
 }
-.portfolio-details .portfolio-info h3 {
+.post-details .post-info h3 {
   font-size: 22px;
   font-weight: 700;
   margin-bottom: 20px;
   padding-bottom: 20px;
   border-bottom: 1px solid #eee;
 }
-.portfolio-details .portfolio-info ul {
+.post-details .post-info ul {
   list-style: none;
   padding: 0;
   font-size: 15px;
 }
-.portfolio-details .portfolio-info ul li + li {
+.post-details .post-info ul li + li {
   margin-top: 10px;
 }
-.portfolio-details .portfolio-description {
+.post-details .post-description {
   padding-top: 30px;
 }
-.portfolio-details .portfolio-description h2 {
+.post-details .post-description h2 {
   font-size: 26px;
   font-weight: 700;
   margin-bottom: 20px;
 }
-.portfolio-details .portfolio-description p {
+.post-details .post-description p {
   padding: 0;
 }
 
@@ -1300,8 +1301,7 @@ section {
   font-size: 16px;
   font-weight: 600;
   color: #fff;
-  position: relative;
-  padding-bottom: 12px;
+  position: relative
 }
 #footer .footer-top .footer-links {
   margin-bottom: 30px;
@@ -1335,7 +1335,6 @@ section {
   color: #27d8fe;
 }
 #footer .footer-top .footer-newsletter form {
-  margin-top: 30px;
   background: #fff;
   padding: 6px 10px;
   position: relative;
@@ -1525,4 +1524,89 @@ section {
     color : white;
     background-color: #428bca;
     padding : 5px 15px;
+}
+
+
+.actived a{color:green}
+.actived a:hover{ font-weight: bold}
+
+.deactivated a{color:red}
+.deactivated a:hover{ font-weight: bold}
+
+.available {color:green; }
+.disable{ color: red; font-weight: bold}
+.intraining{color: blue; font-weight: bold}
+.vacation{ font-weight: bold}
+
+
+.gradient-custom-2 {
+    /* fallback for old browsers */
+    background: #fbc2eb;
+
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to right, rgba(251, 194, 235, 1), rgba(166, 193, 238, 1));
+
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right, rgba(251, 194, 235, 1), rgba(166, 193, 238, 1))
+}
+/*==================================================
+  Nearby People CSS
+  ==================================================*/
+
+.people-nearby .google-maps{
+    background: #f8f8f8;
+    border-radius: 4px;
+    border: 1px solid #f1f2f2;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.people-nearby .google-maps .map{
+    height: 300px;
+    width: 100%;
+    border: none;
+}
+
+.people-nearby .nearby-user{
+    padding: 20px 0;
+    border-top: 1px solid #f1f2f2;
+    border-bottom: 1px solid #f1f2f2;
+    margin-bottom: 20px;
+}
+
+img.profile-photo-lg{
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+}
+.avatar-xl img {
+    width: 110px;
+}
+.rounded-circle {
+    border-radius: 50% !important;
+}
+img {
+    vertical-align: middle;
+    border-style: none;
+}
+.text-muted {
+    color: #aeb0b4 !important;
+}
+.text-muted {
+    font-weight: 300;
+}
+.form-control {
+    display: block;
+    width: 100%;
+    height: calc(1.5em + 0.75rem + 2px);
+    padding: 0.375rem 0.75rem;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #4d5154;
+    background-color: #ffffff;
+    background-clip: padding-box;
+    border: 1px solid #eef0f3;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
