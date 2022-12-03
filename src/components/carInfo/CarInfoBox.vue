@@ -37,7 +37,7 @@
 
 <script>
     export default {
-        props: ["id", "alignment","cars"],
+        props: ["car_id", "alignment","cars"],
         data() {
             return {
                 car: {},
@@ -47,7 +47,7 @@
         },
         computed:{
             getModelById(){
-                return this.cars.find(car => car.id == this.id)
+                return this.cars.find(car => car.id == this.car_id)
 
             }
         },

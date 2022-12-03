@@ -12,7 +12,7 @@
                     <div class="form-group">
                         <label>Audi Model</label>
                         <select class="form-control" v-model="newCar.audiModelId" required>
-                            <option v-for="audiModel in audiModels" :key="audiModel.id"
+                            <option v-for="audiModel in getAudiModels" :key="audiModel.id"
                                     :value="audiModel.id">{{ audiModel.name }}
                             </option>
                         </select>
@@ -32,10 +32,6 @@
                     <div class="form-group">
                         <label>Description ImageURL</label>
                         <input type="text" class="form-control" v-model="newCar.descriptionImageUrl" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Small ImageUrl</label>
-                        <input type="text" class="form-control" v-model="newCar.smallImageUrl" required>
                     </div>
                     <div class="form-group">
                         <label>Top View ImageUrl</label>
@@ -119,11 +115,6 @@
     import {useRouter} from 'vue-router'
 
     export default {
-        data() {
-            return {
-                audiModels: {}
-            }
-        },
         setup(context) {
             onMounted(() => {
             })
@@ -134,7 +125,6 @@
                 modelName: ref(""),
                 price: ref(0),
                 imageURL: ref(""),
-                smallImageUrl: ref(""),
                 topViewImageUrl: ref(""),
                 frontViewImageUrl: ref(""),
                 sideViewImageURL: ref(""),
@@ -162,12 +152,11 @@
             return {newCar, submit}
 
         },
-        mounted() {
-            setTimeout(() => {
-                this.audiModels = this.$store.getters['audiModelModule/audiModels']
-            }, 450)
-
-        }
+        computed:{
+            getAudiModels(){
+                return this.$store.getters['audiModelModule/audiModels']
+            }
+        },
 
     }
 </script>

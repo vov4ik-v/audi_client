@@ -15,5 +15,7 @@
     <orderEntry type="library" name="jquery" level="application" />
     <orderEntry type="library" name="jquery-3.6.0" level="application" />
     <orderEntry type="library" name="jquery-ui" level="application" />
+    <orderEntry type="library" name="sockjs" level="application" />
+    <orderEntry type="library" name="stomp" level="application" />
   </component>
 </module>

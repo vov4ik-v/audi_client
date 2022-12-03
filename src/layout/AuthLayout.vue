@@ -1,7 +1,8 @@
 <template>
     <TheTopbar/>
     <TheNavbar/>
-        <div id="logreg-forms">
+    <div style="min-height: 87vh">
+        <div id="logreg-forms" >
             <div class="row">
                 <div class="col-12 text-center pt-3">
                     <router-link to="/"  >
@@ -11,6 +12,7 @@
             </div>
             <router-view></router-view>
         </div>
+    </div>
     <TheFooter/>
 </template>
 

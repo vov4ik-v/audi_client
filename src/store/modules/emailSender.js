@@ -29,7 +29,7 @@ export default {
             };
 
         },
-        async getAllCars({commit}){
+        async getAllEmails({commit}){
             try{
                 let response =  await axios.get(`http://localhost:8088/api/email/getEmails`)
                 if (response.status === 200){

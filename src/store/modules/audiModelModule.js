@@ -81,6 +81,7 @@ export default {
             return state.audiModels.find(audiModel => audiModel.id == id)
         },
         audiModelByName: (state) => (audiModelName) =>{
+            console.log(audiModelName)
             return state.audiModels.find(audiModel => audiModel.name == audiModelName)
         }
 

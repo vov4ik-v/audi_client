@@ -137,27 +137,17 @@
             getShowFormat(newsImage){
                 return `data:image/png;base64,`+newsImage
             },
+            getNews(){
+                const news = this.$store.getters['newsModule/news']
+                this.sliceNewsList(news)
+                return news;
+            }
             // getNewsList() {
             //     return this.newsList.value;
             // }
         },
         mounted() {
-            console.log(this.newsList.length)
-            if(this.newsList.length === undefined) {
-                NewsService.getAll().then((response) => {
-                        this.newsList = response.data
-                        this.sliceNewsList(this.newsList)
-                    },
-                    (error) => {
-                        this.newsList =
-                            (error.response &&
-                                error.response.data &&
-                                error.response.data.message) ||
-                            error.message ||
-                            error.toString();
-                    })
 
-            }
 
         }
 

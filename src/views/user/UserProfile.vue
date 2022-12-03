@@ -22,15 +22,40 @@
                         </button>
                     </div>
                     <div v-else>
-                        <button type="button" class="btn btn-outline-dark m-1" data-mdb-ripple-color="dark"
-                                style="z-index: 1;">
-                            Follow
+                        <button v-if="!isFriend" @click="followOrUnfollow" style="margin-right: 5px" class="btn btn-primary follow-btn">
+                            <div v-if="loader" class="spinner-border">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                            <span v-else>Follow</span>
+
                         </button>
-                        <button type="button" class="btn btn-outline-dark justify-content-end"
+                        <button v-else type="button" class="btn btn-outline-dark m-1" data-bs-toggle="modal" :data-bs-target="'#unfollowModalWithId'+ getUserInfo.id" data-mdb-ripple-color="dark"
+                                style="z-index: 1;">Following
+                        </button>
+                        <router-link :to="{name:'DirectChat',query:{directId:getUserInfo.id}}"><button type="button" class="btn btn-outline-dark justify-content-end"
                                 data-mdb-ripple-color="dark"
                                 style="z-index: 1;">
                             Direct
-                        </button>
+                        </button></router-link>
+                        <div class="modal fade" :id="'unfollowModalWithId'+ getUserInfo.id" tabindex="-1"
+                             aria-labelledby="postAddLabel"
+                             aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+
+                                    <!-- Modal body -->
+                                    <div class="modal-body text-center">
+                                        <img :src="getProfileImage" alt="user" class="image-for-user">
+                                        <p class="text-center text-black" style="margin-bottom: 28px">Unfollow @{{getUserInfo.username}}?</p>
+                                        <hr class="text-black">
+                                        <button type="button" class="btn unfollow-btn" @click="followOrUnfollow" data-bs-dismiss="modal">Unfollow</button>
+                                        <hr class="text-black">
+                                        <button type="button" class="btn cancel-btn" data-bs-dismiss="modal">Cancel</button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <edit-profile modal-id="editProfile"></edit-profile>
@@ -76,7 +101,7 @@
 </template>
 
 <script>
-    import UserService from "../../services/user.service";
+    import FriendService from "../../services/friend.service";
     import PostBox from "../../components/post/PostBox";
     import PostAdd from "../../components/post/PostAdd";
     import EditProfile from "../../components/user/EditProfile";
@@ -86,11 +111,18 @@
         // props: ['user', 'userImage'],
         data() {
             return {
+                loader:true,
                 content: "",
                 previewImage: null,
                 username: "",
+                isFriend:false,
                 current: new Date()
 
+            }
+        },
+        methods:{
+            followOrUnfollow(){
+                FriendService.addUserToFriend(this.getUserInfo.id).then(()=>{this.isFriend = !this.isFriend})
             }
         },
         inject:['user','userImage'],
@@ -114,6 +146,19 @@
             },
             isCurrentUser() {
                 return this.user.value.username === this.$route.params.username
+            },
+            checkToFriends(){
+                console.log(this.getUserInfo)
+                if(this.getUserInfo.id) {
+                    console.log(this.loader)
+                    FriendService.isFriend(this.getUserInfo.id).then((response) => {
+                        this.isFriend = response.data
+                    })
+                    this.loader = false
+                }
+                else {
+                    this.isFriend =  false
+                }
             }
 
         },
@@ -127,19 +172,17 @@
             this.$store.dispatch('postModule/getAllPostsForUserByUsername', this.username)
             this.$store.dispatch('imageUploadModule/getUserImage', this.username)
             this.$store.dispatch('auth/getUserByUsername', this.username)
-            // this.$store.dispatch('imageUploadModule/getPostImage',28)
-            //  this.$store.dispatch('imageUploadModule/getProfileImage')
-            // // this.previewImage = 'data:image/png;base64,'+this.$store.dispatch('imageUploadModule/getProfileImage')
-            // // console.log(this.previewImage)
-            // // this.previewImage = this.getProfileImage
-
-            // console.log(this.$store.getters['imageUploadModule/getProfileImage'])
 
         }
     }
 </script>
 
 <style scoped>
+    .spinner-border{
+        width:0;
+        height: 0;
+        vertical-align: 0;
+    }
     .post {
         padding: 0
     }

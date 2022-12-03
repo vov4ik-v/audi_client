@@ -1,12 +1,12 @@
 <template>
     <Form @submit="handleLogin" :validation-schema="schema" class="form-signin">
         <h1 class="h3 mb-3 font-weight-normal" style="text-align: center"> Sign in</h1>
-        <div class="social-login">
-            <button class="btn facebook-btn social-btn" type="button"><span><i
-                    class="fab fa-facebook-f"></i> Sign in</span></button>
-            <button class="btn google-btn social-btn" type="button"><span><i class="fab fa-google-plus-g"></i> Sign in </span>
-            </button>
-        </div>
+<!--        <div class="social-login">-->
+<!--            <button class="btn facebook-btn social-btn" type="button"><span><i-->
+<!--                    class="fab fa-facebook-f"></i> Sign in</span></button>-->
+<!--            <button class="btn google-btn social-btn" type="button"><span><i class="fab fa-google-plus-g"></i> Sign in </span>-->
+<!--            </button>-->
+<!--        </div>-->
         <p style="text-align:center"> OR </p>
         <div class="form-group">
             <Field type="username" id="inputEmail" class="form-control" name="username" placeholder="Email address"/>

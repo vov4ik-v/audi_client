@@ -2,14 +2,14 @@
     <Form @submit="handleRegister" :validation-schema="schema" class="form-signin">
         <div v-if="!successful">
         <h5 class="h3 mb-3 font-weight-normal" style="text-align: center"> Sign up</h5>
-        <div class="social-login">
-            <button class="btn facebook-btn social-btn" type="button"><span><i
-                    class="fab fa-facebook-f"></i> Sign up</span></button>
-            <button class="btn google-btn social-btn" type="button"><span><i
-                    class="fab fa-google-plus-g"></i> Sign up</span></button>
-        </div>
+<!--        <div class="social-login">-->
+<!--            <button class="btn facebook-btn social-btn" type="button"><span><i-->
+<!--                    class="fab fa-facebook-f"></i> Sign up</span></button>-->
+<!--            <button class="btn google-btn social-btn" type="button"><span><i-->
+<!--                    class="fab fa-google-plus-g"></i> Sign up</span></button>-->
+<!--        </div>-->
 
-        <p style="text-align:center">OR</p>
+<!--        <p style="text-align:center">OR</p>-->
         <div class="form-group">
             <Field type="text" id="user-firstname" name="firstname" class="form-control" placeholder="First name" required=""
                    autofocus="" />

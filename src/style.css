@@ -30,6 +30,122 @@ h1, h2, h3, h4, h5, h6 {
 /*--------------------------------------------------------------
 # Back to top button
 --------------------------------------------------------------*/
+#chat-page {
+    position: relative;
+    height: 100%;
+}
+
+.chat-container {
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #fff;
+    box-shadow: 0 1px 11px rgba(0, 0, 0, 0.27);
+    margin-top: 30px;
+    height: calc(100% - 60px);
+    max-height: 600px;
+    position: relative;
+}
+
+#chat-page ul {
+    list-style-type: none;
+    background-color: #FFF;
+    margin: 0;
+    overflow: auto;
+    overflow-y: scroll;
+    padding: 0 20px 0px 20px;
+    height: calc(100% - 150px);
+}
+
+#chat-page #messageForm {
+    padding: 20px;
+}
+
+#chat-page ul li {
+    line-height: 1.5rem;
+    padding: 10px 20px;
+    margin: 0;
+    border-bottom: 1px solid #f4f4f4;
+}
+
+#chat-page ul li p {
+    margin: 0;
+}
+
+#chat-page .event-message {
+    width: 100%;
+    text-align: center;
+    clear: both;
+}
+
+#chat-page .event-message p {
+    color: #777;
+    font-size: 14px;
+    word-wrap: break-word;
+}
+
+#chat-page .chat-message {
+    padding-left: 68px;
+    position: relative;
+}
+
+#chat-page .chat-message i {
+    position: absolute;
+    width: 42px;
+    height: 42px;
+    overflow: hidden;
+    left: 10px;
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 18px;
+    line-height: 42px;
+    color: #fff;
+    text-align: center;
+    border-radius: 50%;
+    font-style: normal;
+    text-transform: uppercase;
+}
+
+#chat-page .chat-message span {
+    color: #333;
+    font-weight: 600;
+}
+
+#chat-page .chat-message p {
+    color: #43464b;
+}
+
+#messageForm .input-group input {
+    float: left;
+    width: calc(100% - 85px);
+}
+
+#messageForm .input-group button {
+    float: left;
+    width: 80px;
+    height: 38px;
+    margin-left: 5px;
+}
+
+.chat-header {
+    text-align: center;
+    padding: 15px;
+    border-bottom: 1px solid #ececec;
+}
+
+.chat-header h2 {
+    margin: 0;
+    font-weight: 500;
+}
+
+.connecting {
+    padding-top: 5px;
+    text-align: center;
+    color: #777;
+    position: absolute;
+    top: 65px;
+    width: 100%;
+}
 .back-to-top {
   position: fixed;
   visibility: hidden;
@@ -800,7 +916,7 @@ section {
 }
 .post .post-wrap .post-info {
   display: flex;
-    cursor: pointerw;
+    cursor: pointer;
   justify-content: center;
   align-items: center;
   flex-direction: column;
@@ -1087,7 +1203,7 @@ section {
 # Contact
 --------------------------------------------------------------*/
 .contact .info-wrap {
-  box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
   padding: 30px;
 }
 .contact .info {
@@ -1571,7 +1687,7 @@ section {
     padding: 20px 0;
     border-top: 1px solid #f1f2f2;
     border-bottom: 1px solid #f1f2f2;
-    margin-bottom: 20px;
+
 }
 
 img.profile-photo-lg{
@@ -1609,4 +1725,36 @@ img {
     border: 1px solid #eef0f3;
     border-radius: 0.25rem;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+.profile-link a{
+    color:black;
+}
+.profile-link a:hover{
+    color:#2a3336;
+}
+.follow-btn{
+    background-color: rgb(0, 149, 246);
+    border: 1px solid transparent;
+}
+.following-btn {
+    background-color: transparent;
+    color: rgb(38,38,38);
+    border: 1px solid rgb(219,219,219);
+}
+.unfollow-btn{
+    color:rgb(237, 73, 86);
+    font-weight: bold;
+    font-size: 14px;
+    padding:0
+}
+.cancel-btn{
+    color:rgb(38,38,38);
+    font-size: 13px;
+    padding:0
+}
+.image-for-user{
+    height: 120px;
+    width: 120px;
+    border-radius: 50%;
+    margin-bottom: 40px;
 }

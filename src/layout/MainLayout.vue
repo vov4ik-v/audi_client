@@ -1,7 +1,7 @@
 <template>
     <TheTopbar/>
     <TheNavbar/>
-    <router-view :key="$route.path"></router-view>
+    <router-view style="min-height: 87vh" v-if="!loading" :key="$route.path"></router-view>
     <TheFooter/>
 </template>
 
@@ -16,6 +16,7 @@
         components: {TheTopbar, TheFooter,TheNavbar},
         data(){
             return{
+                loading:false,
                 user:{
                     user:"fasfa",
                     content:"",
@@ -47,6 +48,10 @@
         async loadFile(){
             await this.$store.dispatch("imageUploadModule/getProfileImage")
             await this.$store.dispatch("auth/getUserInfo")
+            await this.$store.dispatch("carModule/getAllCars")
+            await this.$store.dispatch("chat/getFriends")
+            await this.$store.dispatch("newsModule/getNews")
+            await this.$store.dispatch("audiModelModule/getAllAudiModels")
              UserService.getUserBoard().then(
                 (response) => {
                     this.user.content = response.data;
@@ -67,7 +72,9 @@
 
     },
      mounted() {
+         this.loading = true
          this.loadFile()
+         this.loading = false
 
     },
 

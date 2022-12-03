@@ -12,7 +12,7 @@
                     <div class="form-group">
                         <label>Audi Model</label>
                         <select class="form-control" v-model="updatedCar.audiModelId" required>
-                            <option v-for="audiModel in audiModels" :key="audiModel.id"
+                            <option v-for="audiModel in getAudiModels" :key="audiModel.id"
                                     :value="audiModel.id">{{ audiModel.name }}
                             </option>
                         </select>
@@ -32,10 +32,6 @@
                     <div class="form-group">
                         <label>Description ImageURL</label>
                         <input type="text" class="form-control" v-model="updatedCar.descriptionImageUrl" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Small ImageUrl</label>
-                        <input type="text" class="form-control" v-model="updatedCar.smallImageUrl" required>
                     </div>
                     <div class="form-group">
                         <label>Top View ImageUrl</label>
@@ -119,29 +115,31 @@
         data() {
             return {
                 id:null,
-                audiModels: {},
-                updatedCar: {}
+                updatedCar: {},
+                modelName:""
             }
         },
         methods:{
             submit(){
                 this.$store.dispatch("carModule/editCar", this.updatedCar)
                 this.$router.push({name: 'Home'})
+            },
+            async loadAudiInfo(){
+                this.modelName = this.$route.params.modelName
+                await this.$store.dispatch("carModule/getAllCars")
+                this.updatedCar = await this.$store.getters['carModule/carByAudiModel'](this.modelName)
+            }
+
+        },
+
+        computed:{
+            getAudiModels(){
+                return this.$store.getters['audiModelModule/audiModels']
             }
         },
 
         mounted() {
-            setTimeout(() => {
-                console.log("mounted")
-                this.modelName = this.$route.params.modelName
-                this.audiModels = this.$store.getters['audiModelModule/audiModels']
-                this.updatedCar = this.$store.getters['carModule/carByAudiModel'](this.modelName)
-            }, 350)
-            // function submit() {
-            //     store.dispatch("addCar", updatedCar)
-            //     router.push({name: 'Home'})
-            //     context.emit('fetchData')
-            // }
+            this.loadAudiInfo()
         }
     }
 
